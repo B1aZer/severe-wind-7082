@@ -37,7 +37,7 @@ def vk_auth(resp):
             request.args['error_reason'],
             request.args['error_description']
         )
-    session['oauth_token'] = (resp['access_token'], '')
+    #session['oauth_token'] = (resp['access_token'], '')
     #me = vk.get('wall.get?owner_id=771193')
     return resp
 
