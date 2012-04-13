@@ -21,12 +21,15 @@ vk = oauth.remote_app('vkontakte',
 
 @app.route('/')
 def hello():
-    return render_template('index.html')
+    if 'access_token' in session:
+        return render_template('index.html')
+    else:
+        return redirect(url_for(login))
 
 @app.route('/json')
 def jsony():
-    if 'oauth_token' in session:
-        me=vk.get('wall.get?owner_id=771193&count=20&filter=owner?access_token=%s' % session.get('access_token'))
+    if 'access_token' in session:
+        me=vk.get('wall.get?owner_id=771193&count=50?access_token=%s' % session.get('access_token'))
         return jsonify(result=me.data['response'][1:])
     return jsonify(result=None)
 
