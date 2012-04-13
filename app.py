@@ -21,6 +21,9 @@ vk = oauth.remote_app('vkontakte',
 
 @app.route('/')
 def hello():
+    if 'oauth_token' in session:
+        me=vk.get('wall.get?owner_id=771193')
+        return 'vk: %s' % me
     return 'Hello World!'
 
 @app.route('/login')
@@ -39,11 +42,11 @@ def vk_auth(resp):
         )
     session['oauth_token'] = (resp['access_token'], '')
     #me = vk.get('wall.get?owner_id=771193')
-    return 'resp : %s ' % resp
+    return redirect('/')
 
 
 @vk.tokengetter
-def get_facebook_oauth_token():
+def get_vk_oauth_token():
     return session.get('oauth_token')
 
 
