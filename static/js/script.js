@@ -40,7 +40,7 @@ $(document).ready(function()
 				
 		$.getJSON('/json',function(data) {
         console.debug(data);
-			$.each(data, function(i, post) {
+			$.each(data['result'], function(i, post) {
 				appendTweet(post.text, post.id);
 			});
 			
