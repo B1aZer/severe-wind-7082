@@ -41,11 +41,11 @@ $(document).ready(function()
 		$.getJSON('/json',function(data) {
         console.debug(data);
 			$.each(data['result'], function(i, post) {
-                /*if (post.date <= 1334085077) {*/
-                $.getJSON('https://api.vk.com/method/getProfiles?uid=%s&fields=photo' % post.id ,function(data) { 
+                if (post.date <= 1334085077) {
+                    /*$.getJSON('https://api.vk.com/method/getProfiles?uid=%s&fields=photo' % post.id ,function(data) { */
 				appendTweet(post.text, post.id, data['response'].photo);
-                });
-                /*}*/
+            /*});*/
+                }
 			});
 			
 			// We're done loading the tweets, so hide the overlay and update the UI
