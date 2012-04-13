@@ -20,14 +20,14 @@ $(document).ready(function()
 	var currentPage = 1;
 	
 	// Appends the new tweet to the UI
-	var appendTweet = function(tweet, id, photo) {
+	var appendTweet = function(tweet, id) {
 		$("<p />")
 			.html(tweet)
 			.append($("<a />")
 					.attr("href", "http://twitter.com/" + username + "/status/" + id)
 					.attr("title", "Go to Twitter status")
 					.append($("<img />")
-						.attr("src", photo)
+						.attr("src", "img/link.png")
 					)
 			)
 		.appendTo($("#tweets"));
@@ -43,7 +43,7 @@ $(document).ready(function()
 			$.each(data['result'], function(i, post) {
                 if (post.date <= 1334085077) {
                     /*$.getJSON('https://api.vk.com/method/getProfiles?uid=%s&fields=photo' % post.id ,function(data) { */
-				appendTweet(post.text, post.id, data['response'].photo);
+				appendTweet(post.text, post.id);
             /*});*/
                 }
 			});
