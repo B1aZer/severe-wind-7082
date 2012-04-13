@@ -22,7 +22,7 @@ vk = oauth.remote_app('vkontakte',
 @app.route('/')
 def hello():
     if 'oauth_token' in session:
-        me=vk.get('wall.get?owner_id=771193')
+        me=vk.get('/wall.get?owner_id=771193')
         return 'vk: %s' % me
     return 'Hello World!'
 
