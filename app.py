@@ -25,7 +25,9 @@ def hello():
 
 @app.route('/login')
 def login():
-    return vk.authorize(callback='http://skdy.org/illarionov')
+    return vk.authorize(callback=url_for('vk_auth',
+        next=request.args.get('next') or request.referrer or None,
+        _external=True))
 
 @app.route('/login/authorized')
 @vk.authorized_handler
