@@ -39,8 +39,7 @@ def vk_auth(resp):
         )
     session['oauth_token'] = (resp['access_token'], '')
     me = vk.get('wall.get?owner_id=771193')
-    return 'Logged in as id=%s name=%s redirect=%s' % \
-        (me.data['id'], me.data['name'], request.args.get('next'))
+    return me
 
 
 @vk.tokengetter
