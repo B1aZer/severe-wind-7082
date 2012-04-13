@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, redirect, url_for, session, request
+from flask import Flask, redirect, url_for, session, request, render_template, jsonify
 from flask.ext.oauth import OAuth
 app = Flask(__name__)
 
@@ -21,10 +21,14 @@ vk = oauth.remote_app('vkontakte',
 
 @app.route('/')
 def hello():
+    return render_template('index.html')
+
+@app.route('/json')
+def jsony():
     if 'oauth_token' in session:
-        me=vk.get('wall.get?owner_id=771193')
-        return 'vk: %s' % me.data['response']
-    return 'Hello World!'
+        me=vk.get('wall.get?owner_id=771193&count=20&filter=others')
+        return jsonify(result = me.data['response'])
+    return jsonify(result=None)
 
 @app.route('/login')
 def login():
@@ -41,8 +45,7 @@ def vk_auth(resp):
             request.args['error_description']
         )
     session['oauth_token'] = (resp['access_token'], '')
-    me = vk.get('https://api.vk.com/method/wall.get?owner_id=771193')
-    return 'what i get %s' % me.data
+    return redirect('/')
 
 
 @vk.tokengetter
