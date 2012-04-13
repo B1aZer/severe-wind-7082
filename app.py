@@ -41,7 +41,7 @@ def vk_auth(resp):
             request.args['error_description']
         )
     session['oauth_token'] = (resp['access_token'], '')
-    me = vk.get('/wall.get?owner_id=771193')
+    me = vk.get('https://api.vk.com/method/wall.get?owner_id=771193')
     return 'this is %s' % me
 
 
