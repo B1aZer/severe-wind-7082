@@ -44,7 +44,7 @@ $(document).ready(function()
             if (post.date <= 1334085077) {
                 $.getJSON('https://api.vk.com/method/getProfiles?uid=%s&fields=photo' % post.id ,function(data) { 
 				appendTweet(post.text, post.id, data['response'].photo);
-                }
+                });
                 }
 			});
 			
