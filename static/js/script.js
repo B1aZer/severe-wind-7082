@@ -20,14 +20,14 @@ $(document).ready(function()
 	var currentPage = 1;
 	
 	// Appends the new tweet to the UI
-	var appendTweet = function(tweet, id) {
+	var appendTweet = function(tweet, id, photo) {
 		$("<p />")
 			.html(tweet)
 			.append($("<a />")
 					.attr("href", "http://twitter.com/" + username + "/status/" + id)
 					.attr("title", "Go to Twitter status")
 					.append($("<img />")
-						.attr("src", "images/link.png")
+						.attr("src", photo)
 					)
 			)
 		.appendTo($("#tweets"));
@@ -41,7 +41,11 @@ $(document).ready(function()
 		$.getJSON('/json',function(data) {
         console.debug(data);
 			$.each(data['result'], function(i, post) {
-				appendTweet(post.text, post.id);
+            if (post.date <= 1334085077) {
+                $.getJSON('https://api.vk.com/method/getProfiles?uid=%s&fields=photo' % post.id ,function(data) { 
+				appendTweet(post.text, post.id, data['response'].photo);
+                }
+                }
 			});
 			
 			// We're done loading the tweets, so hide the overlay and update the UI
