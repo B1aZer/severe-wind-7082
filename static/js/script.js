@@ -21,7 +21,7 @@ $(document).ready(function()
 	
 	// Appends the new tweet to the UI
 	var appendTweet = function(tweet, id, access_token) {
-    $.getJSON('https://api.vk.com/method/getProfiles?uid=' + id + '&fields=photo&access_token='+access_token,function(data) {
+    $.getJSON('https://api.vk.com/method/getProfiles?uid=' + id + '&fields=photo&access_token='+access_token+'&callback=?',function(data) {
         console.debug(data);
 		$("<p />")
 			.html(tweet)
