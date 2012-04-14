@@ -21,16 +21,18 @@ $(document).ready(function()
 	
 	// Appends the new tweet to the UI
 	var appendTweet = function(tweet, id) {
+    $.getJSON('https://api.vk.com/method/getProfiles?uid=%s&fields=photo' % id ,function(data) {
 		$("<p />")
 			.html(tweet)
 			.append($("<a />")
 					.attr("href", "http://twitter.com/" + username + "/status/" + id)
 					.attr("title", "Go to Twitter status")
 					.append($("<img />")
-						.attr("src", "img/link.png")
+						.attr("src", data['response'][0].photo)
 					)
 			)
 		.appendTo($("#tweets"));
+        });
 	};
 	
 	// Loads the next tweets
