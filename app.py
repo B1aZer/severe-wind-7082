@@ -51,7 +51,7 @@ def hello():
     if g.code:
         return render_template('index.html')
     else:
-        return redirect(url_for(login))
+        return redirect(url_for('login'))
 
 @app.route('/json/<int:offset>')
 def jsony(offset):
