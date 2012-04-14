@@ -23,7 +23,8 @@ $(document).ready(function()
 	var appendTweet = function(tweet, id, access_token) {
     $.getJSON('https://api.vk.com/method/getProfiles?uid=' + id + '&fields=photo&access_token='+access_token+'&callback=?',function(data) {
         console.debug(data);
-        $("<div class=\"span3\" />")
+        $("<div class=\"row\" />")
+            .append($("<div class=\"span3\" />")
 		    .append($("<blockquote />")
             .append($("<p />")
 			.html(tweet)
@@ -32,16 +33,16 @@ $(document).ready(function()
             .html(data['response'][0].first_name + " " + data['response'][0].last_name)
             )
             )
-
-		.appendTo($("#tweets"));
-        $("<div class=\"span1\" />")
-        .append($("<a />")
+            )
+            .append($("<div class=\"span1\" />")
+            .append($("<a />")
 					.attr("href", "http://twitter.com/" + username + "/status/" + id)
 					.attr("title", "Go to Twitter status")
 					.append($("<img />")
 						.attr("src", data['response'][0].photo)
 					)
 			)
+            )
 		.appendTo($("#tweets"));
         });
 	};
