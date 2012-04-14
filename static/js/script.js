@@ -7,7 +7,7 @@ $(document).ready(function()
 	/**
 	* Set the size for each page to load
 	*/
-	var pageSize = 15;
+	var pageSize = 20;
 	
 	/**
 	* Username to load the timeline from
@@ -18,6 +18,7 @@ $(document).ready(function()
 	* Variable for the current page
 	*/
 	var currentPage = 1;
+	var offSet = 0;
 	
 	// Appends the new tweet to the UI
 	var appendTweet = function(tweet, id, access_token) {
@@ -49,10 +50,8 @@ $(document).ready(function()
 	
 	// Loads the next tweets
 	var loadTweets = function() {
-		var url = "http://twitter.com/status/user_timeline/"
-				+ username + ".json?count="+pageSize+"&page="+currentPage+"&callback=?";
 				
-		$.getJSON('/json',function(data) {
+		$.getJSON('/json/'+offSet,function(data) {
         console.debug(data);
 			$.each(data['result'], function(i, post) {
                 if (post.date <= 1334085077) {
@@ -79,6 +78,7 @@ $(document).ready(function()
 		if ($(this)[0].scrollHeight - $(this).scrollTop() == $(this).outerHeight()) {
 			// If we're at the bottom, show the overlay and retrieve the next page
 			currentPage++;
+            offSet=offSet+(currentPage * pageSize);
 			
 			if(currentPage > 10) {
 				alert('We should not spam the Twitter API with calls. I hope you get the idea!');

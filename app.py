@@ -26,10 +26,10 @@ def hello():
     else:
         return redirect(url_for(login))
 
-@app.route('/json')
-def jsony():
+@app.route('/json/<int:offset>')
+def jsony(offset):
     if 'oauth_token' in session:
-        me=vk.get('wall.get?owner_id=771193&count=20&filter=others&access_token=%s' % session.get('access_token'))
+        me=vk.get('wall.get?owner_id=771193&count=20&filter=others&offset=%s&access_token=%s' % (offset,session.get('access_token')))
         return jsonify(result=me.data['response'][1:],
                     access_token = session.get('access_token'))
     return jsonify(result=None)
