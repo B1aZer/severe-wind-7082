@@ -28,6 +28,8 @@ class Acode(Base):
 
     def __init__(self, code):
          self.code = code
+def init_db():
+    Base.metadata.create_all(bind=engine)
 
 oauth = OAuth()
 
