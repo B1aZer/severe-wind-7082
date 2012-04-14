@@ -5,6 +5,24 @@
 $(document).ready(function()
 {
 
+function touchScroll(id){
+	if(isTouchDevice()){ //if touch events exist...
+		var el=document.getElementById(id);
+		var scrollStartPos=0;
+
+		document.getElementById(id).addEventListener("touchstart", function(event) {
+			scrollStartPos=this.scrollTop+event.touches[0].pageY;
+			event.preventDefault();
+		},false);
+
+		document.getElementById(id).addEventListener("touchmove", function(event) {
+			this.scrollTop=scrollStartPos-event.touches[0].pageY;
+			event.preventDefault();
+		},false);
+	}
+}
+
+
     $('#myCarousel').carousel({
         interval: 5200
     });
@@ -89,6 +107,7 @@ $(document).ready(function()
 
     // First time, directly load the tweets
     loadTweets();
+    touchScroll("tweets");
 
     // Append a scroll event handler to the container
     $("#tweets").scroll(function() {
