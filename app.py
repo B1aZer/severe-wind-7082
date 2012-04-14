@@ -33,6 +33,9 @@ class Acode(Base):
 def init_db():
     Base.metadata.create_all(bind=engine)
 
+def drop_db():
+    Base.metadata.drop_all(bind=engine)
+
 oauth = OAuth()
 
 vk = oauth.remote_app('vkontakte',
@@ -47,7 +50,7 @@ vk = oauth.remote_app('vkontakte',
 @app.before_request
 def before_request():
     g.code=getattr(g,'code',None)
-    if not 'access_token' in session:
+    if not g.code:
         g.code = sess.query(Acode).order_by(desc('date_created')).first()
 
 @app.route('/')
