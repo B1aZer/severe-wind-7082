@@ -42,7 +42,7 @@ function touchScroll(id){
                 mp3: "/static/mp3/dietro.mp3",
                 m4a: "/static/mp3/dietro.m4a",
 				oga: "/static/mp3/Dietro.ogg",
-			}).jPlayer("play");
+			});
 		},
 		supplied: "mp3, m4a, oga",
 		swfPath: "/static/js",
