@@ -5,6 +5,15 @@
 $(document).ready(function()
 {
 
+function isTouchDevice(){
+	try{
+		document.createEvent("TouchEvent");
+		return true;
+	}catch(e){
+		return false;
+	}
+}
+
 function touchScroll(id){
 	if(isTouchDevice()){ //if touch events exist...
 		var el=document.getElementById(id);
