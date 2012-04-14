@@ -6,7 +6,7 @@ $(document).ready(function()
 {
 
     $('#myCarousel').carousel({
-        interval: 9200
+        interval: 5200
     });
 
 	$("#player").jPlayer({
