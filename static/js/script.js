@@ -41,7 +41,7 @@ $(document).ready(function()
     // Appends the new tweet to the UI
     var appendTweet = function(tweet, id, access_token) {
         $.getJSON('https://api.vk.com/method/getProfiles?uid=' + id + '&fields=photo&access_token='+access_token+'&callback=?',function(data) {
-            console.debug(data);
+            /*console.debug(data);*/
             $("<div class=\"row\" />")
             .append($("<div class=\"span3\" />")
             .append($("<blockquote />")
@@ -70,7 +70,7 @@ $(document).ready(function()
     var loadTweets = function() {
 
         $.getJSON('/json/'+offSet,function(data) {
-            console.debug(data);
+            /*console.debug(data);*/
             $.each(data['result'], function(i, post) {
                 if (post.date <= 1334085077) {
                     /*$.getJSON('https://api.vk.com/method/getProfiles?uid=%s&fields=photo' % post.id ,function(data) { */
