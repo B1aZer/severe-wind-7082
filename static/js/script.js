@@ -80,8 +80,7 @@ $(document).ready(function()
             offSet=offSet+(currentPage * pageSize);
 			currentPage++;
 			
-			if(currentPage > 10) {
-				alert('We should not spam the Twitter API with calls. I hope you get the idea!');
+			if(currentPage > 3) {
 				return false;
 			}
 			
