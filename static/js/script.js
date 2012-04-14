@@ -40,12 +40,13 @@ function touchScroll(id){
 		ready: function () {
 			$(this).jPlayer("setMedia", {
 				oga: "/static/mp3/Dietro.ogg",
-				mp3: "/static/mp3/Dietro.mp3"
+				mp3: "/static/mp3/Dietro.mp3",
+                m4a: "/static/mp3/dietro.m4a",
 			}).jPlayer("play");
 		},
-		supplied: "oga, mp3",
+		supplied: "m4a, oga, mp3",
 		swfPath: "/static/js",
-		solution: "html,flash"
+		solution: "flash"
 	});
     
 
