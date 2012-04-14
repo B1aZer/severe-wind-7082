@@ -6,8 +6,21 @@ $(document).ready(function()
 {
 
     $('#myCarousel').carousel({
-        interval: 3200
+        interval: 9200
     });
+
+	$("#player").jPlayer({
+		ready: function () {
+			$(this).jPlayer("setMedia", {
+				oga: "/static/mp3/Dietro.ogg",
+				mp3: "/static/mp3/Dietro.mp3"
+			}).jPlayer("play");
+		},
+		supplied: "oga, mp3",
+		swfPath: "/static/js",
+		solution: "html,flash"
+	});
+    
 
     /**
     * Set the size for each page to load

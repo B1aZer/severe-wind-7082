@@ -27,38 +27,8 @@ body {
 <!-- Le fav and touch icons -->
 
 
-<!-- START SOUND CODE V3.15  -->
-<center>
-    <script language="JavaScript" type="text/javascript">
-<!--
-// PLAYER VARIABLES
 
-var mp3snd = "static/mp3/Dietro.mp3";
-var bkcolor = "000000";
-
-if ( navigator.userAgent.toLowerCase().indexOf( "msie" ) != -1 ) {
-    document.write('<bgsound src="'+mp3snd+'" loop="1">');
-}
-else if ( navigator.userAgent.toLowerCase().indexOf( "firefox" ) != -1 ) {
-    document.write('<object data="'+mp3snd+'" type="application/x-mplayer2" width="0" height="0">');
-    document.write('<param name="filename" value="'+mp3snd+'">');
-    document.write('<param name="autostart" value="1">');
-    document.write('</object>');
-}
-else {
-    document.write('<audio src="'+mp3snd+'" autoplay="autoplay">');
-    document.write('<object data="'+mp3snd+'" type="application/x-mplayer2" width="0" height="0">');
-    document.write('<param name="filename" value="'+mp3snd+'">');
-    document.write('<param name="autostart" value="1">');
-    document.write('<embed height="2" width="2" src="'+mp3snd+'" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime" controller="false" controls="false" autoplay="true" autostart="true" loop="false" bgcolor="#'+bkcolor+'"><br>');
-    document.write('</embed></object>');
-    document.write('</audio>');
-}
-//-->
-    </script>
-    <br>
-</center>
-<!-- END SOUND CODE V3.15 -->
+<script type="text/javascript" src="/static/js/jquery.jplayer.min.js"></script>
 
 </head>
 
@@ -78,8 +48,11 @@ else {
 </div>
 
 <div class="container">
+    <div id="player"></div>
     <h1>Поздравляю с Днем Рождения</h1>
-    <p>С этого момента всем твоим начинаниям будет сопутсвовать удача<br> All you get is this message and a barebones HTML document.</p>
+    <p>Пусть с этого момента всем твоим начинаниям сопутствует удача<br>
+    A в семье процветает гармония и уют. <br>
+    </p>
 
 
     <div class="row">
