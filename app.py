@@ -1,12 +1,33 @@
 import os
 
-from flask import Flask, redirect, url_for, session, request, render_template, jsonify
+from flask import Flask, redirect, url_for, session, request, render_template, jsonify, g
 from flask.ext.oauth import OAuth
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import Column, Integer, String
+
+
+
 app = Flask(__name__)
 
 app.debug = True
 app.secret_key = "SECRET"
 
+engine = create_engine(os.environ.get('DATABASE_URL'), echo=True)
+Base = declarative_base()
+Session = sessionmaker(bind=engine)
+sess = Session()
+
+
+class Acode(Base):
+    __tablename__ = 'acode'
+
+    id = Column(Integer, primary_key=True)
+    code = Column(String)
+
+    def __init__(self, code):
+         self.code = code
 
 oauth = OAuth()
 
@@ -19,19 +40,25 @@ vk = oauth.remote_app('vkontakte',
     consumer_secret='xpyuJye6NozdTazuuRvM'
 )
 
+@app.before_request
+def before_request():
+    g.code=getattr(g,'code',None)
+    if not 'access_token' in session:
+        g.code = sess.query(Acode).last()
+
 @app.route('/')
 def hello():
-    if 'access_token' in session:
+    if g.code:
         return render_template('index.html')
     else:
         return redirect(url_for(login))
 
 @app.route('/json/<int:offset>')
 def jsony(offset):
-    if 'oauth_token' in session:
-        me=vk.get('wall.get?owner_id=771193&count=20&filter=others&offset=%s&access_token=%s' % (offset,session.get('access_token')))
+    if g.code:
+        me=vk.get('wall.get?owner_id=771193&count=20&filter=others&offset=%s&access_token=%s' % (offset,g.code))
         return jsonify(result=me.data['response'][1:],
-                    access_token = session.get('access_token'))
+                    access_token = g.code)
     return jsonify(result=None)
 
 @app.route('/login')
@@ -49,6 +76,9 @@ def vk_auth(resp):
             request.args['error_description']
         )
     session['access_token'] = resp['access_token']
+    code = Acode(resp['access_token'] )
+    sess.add(code)
+    sess.commit(code)
     session['oauth_token'] = (resp['access_token'], '')
     return redirect('/')
 
