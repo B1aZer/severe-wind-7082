@@ -2,10 +2,11 @@ import os
 
 from flask import Flask, redirect, url_for, session, request, render_template, jsonify, g
 from flask.ext.oauth import OAuth
-from sqlalchemy import create_engine
+from datetime import datetime
+from sqlalchemy import create_engine, desc
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, DateTime
 
 
 
@@ -25,6 +26,7 @@ class Acode(Base):
 
     id = Column(Integer, primary_key=True)
     code = Column(String)
+    date_created = Column(DateTime,  default=datetime.utcnow)
 
     def __init__(self, code):
          self.code = code
@@ -46,7 +48,7 @@ vk = oauth.remote_app('vkontakte',
 def before_request():
     g.code=getattr(g,'code',None)
     if not 'access_token' in session:
-        g.code = sess.query(Acode).last()
+        g.code = sess.query(Acode).order_by(desc('date_created')).first()
 
 @app.route('/')
 def hello():
