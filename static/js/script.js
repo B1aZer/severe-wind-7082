@@ -27,18 +27,21 @@ $(document).ready(function()
 		    .append($("<blockquote />")
             .append($("<p />")
 			.html(tweet)
-			.append($("<a />")
-					.attr("href", "http://twitter.com/" + username + "/status/" + id)
-					.attr("title", "Go to Twitter status")
-					.append($("<img />")
-						.attr("src", data['response'][0].photo)
-					)
-			))
+			)
             .append($("<small />")
             .html(data['response'][0].first_name + " " + data['response'][0].last_name)
             )
             )
 
+		.appendTo($("#tweets"));
+        $("<div class=\"span1\" />")
+        .append($("<a />")
+					.attr("href", "http://twitter.com/" + username + "/status/" + id)
+					.attr("title", "Go to Twitter status")
+					.append($("<img />")
+						.attr("src", data['response'][0].photo)
+					)
+			)
 		.appendTo($("#tweets"));
         });
 	};
