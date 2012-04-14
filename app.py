@@ -63,9 +63,9 @@ def hello():
 @app.route('/json/<int:offset>')
 def jsony(offset):
     if g.code:
-        me=vk.get('wall.get?owner_id=771193&count=20&filter=others&offset=%s&access_token=%s' % (offset,g.code))
+        me=vk.get('wall.get?owner_id=771193&count=20&filter=others&offset=%s&access_token=%s' % (offset,g.code.code))
         return jsonify(result=me.data['response'][1:],
-                    access_token = g.code)
+                    access_token = g.code.code)
     return jsonify(result=None)
 
 @app.route('/login')
