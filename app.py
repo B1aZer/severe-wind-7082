@@ -78,7 +78,7 @@ def vk_auth(resp):
     session['access_token'] = resp['access_token']
     code = Acode(resp['access_token'] )
     sess.add(code)
-    sess.commit(code)
+    sess.commit()
     session['oauth_token'] = (resp['access_token'], '')
     return redirect('/')
 
