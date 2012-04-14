@@ -77,8 +77,8 @@ $(document).ready(function()
 		// We check if we're at the bottom of the scrollcontainer
 		if ($(this)[0].scrollHeight - $(this).scrollTop() == $(this).outerHeight()) {
 			// If we're at the bottom, show the overlay and retrieve the next page
-			currentPage++;
             offSet=offSet+(currentPage * pageSize);
+			currentPage++;
 			
 			if(currentPage > 10) {
 				alert('We should not spam the Twitter API with calls. I hope you get the idea!');
