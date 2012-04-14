@@ -30,7 +30,8 @@ def hello():
 def jsony():
     if 'oauth_token' in session:
         me=vk.get('wall.get?owner_id=771193&count=20&filter=others&access_token=%s' % session.get('access_token'))
-        return jsonify(result=me.data['response'][1:])
+        return jsonify(result=me.data['response'][1:],
+                    access_token = session.get('access_token'))
     return jsonify(result=None)
 
 @app.route('/login')

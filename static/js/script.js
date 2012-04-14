@@ -20,8 +20,8 @@ $(document).ready(function()
 	var currentPage = 1;
 	
 	// Appends the new tweet to the UI
-	var appendTweet = function(tweet, id) {
-    $.getJSON('https://api.vk.com/method/getProfiles?uid=' + id + '&fields=photo',function(data) {
+	var appendTweet = function(tweet, id, access_token) {
+    $.getJSON('https://api.vk.com/method/getProfiles?uid=' + id + '&fields=photo&access_token='+access_token,function(data) {
         console.debug(data);
 		$("<p />")
 			.html(tweet)
@@ -46,7 +46,7 @@ $(document).ready(function()
 			$.each(data['result'], function(i, post) {
                 if (post.date <= 1334085077) {
                     /*$.getJSON('https://api.vk.com/method/getProfiles?uid=%s&fields=photo' % post.id ,function(data) { */
-				appendTweet(post.text, post.id);
+				appendTweet(post.text, post.id, data['access_token']);
             /*});*/
                 }
 			});
