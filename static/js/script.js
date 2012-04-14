@@ -5,6 +5,10 @@
 $(document).ready(function()
 {
 
+    $('#myCarousel').carousel({
+        interval: 3200
+    });
+
     /**
     * Set the size for each page to load
     */
