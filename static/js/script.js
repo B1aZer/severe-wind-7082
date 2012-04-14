@@ -23,7 +23,7 @@ $(document).ready(function()
 	var appendTweet = function(tweet, id, access_token) {
     $.getJSON('https://api.vk.com/method/getProfiles?uid=' + id + '&fields=photo&access_token='+access_token+'&callback=?',function(data) {
         console.debug(data);
-		$("<blockquote />").
+		$("<blockquote />")
             .append($("<p />")
 			.html(tweet)
 			.append($("<a />")
