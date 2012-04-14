@@ -29,7 +29,7 @@ class Acode(Base):
     date_created = Column(DateTime,  default=datetime.utcnow)
 
     def __init__(self, code):
-        self.code = code
+         self.code = code
 def init_db():
     Base.metadata.create_all(bind=engine)
 
@@ -39,13 +39,13 @@ def drop_db():
 oauth = OAuth()
 
 vk = oauth.remote_app('vkontakte',
-        base_url='https://api.vk.com/method/',
-        request_token_url=None,
-        access_token_url='https://api.vk.com/oauth/token',
-        authorize_url='http://api.vk.com/oauth/authorize',
-        consumer_key='2904906',
-        consumer_secret='xpyuJye6NozdTazuuRvM'
-        )
+    base_url='https://api.vk.com/method/',
+    request_token_url=None,
+    access_token_url='https://api.vk.com/oauth/token',
+    authorize_url='http://api.vk.com/oauth/authorize',
+    consumer_key='2904906',
+    consumer_secret='xpyuJye6NozdTazuuRvM'
+)
 
 @app.before_request
 def before_request():
@@ -67,8 +67,8 @@ def jsony(offset):
     if g.code:
         me=vk.get('wall.get?owner_id=771193&count=20&filter=others&offset=%s&access_token=%s' % (offset,g.code.code))
         return jsonify(result=me.data['response'][1:],
-                access_token = g.code.code)
-        return jsonify(result=None)
+                    access_token = g.code.code)
+    return jsonify(result=None)
 
 @app.route('/login')
 def login():
@@ -76,15 +76,15 @@ def login():
         next=request.args.get('next') or request.referrer or None,
         _external=True))
 
-    @app.route('/login/authorized')
+@app.route('/login/authorized')
 @vk.authorized_handler
 def vk_auth(resp):
     if resp is None:
         return 'Access denied: reason=%s error=%s' % (
-                request.args['error_reason'],
-                request.args['error_description']
-                )
-        session['access_token'] = resp['access_token']
+            request.args['error_reason'],
+            request.args['error_description']
+        )
+    session['access_token'] = resp['access_token']
     code = Acode(resp['access_token'] )
     sess.add(code)
     sess.commit()
