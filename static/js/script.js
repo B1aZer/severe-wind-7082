@@ -40,7 +40,7 @@ function touchScroll(id){
 		ready: function () {
 			$(this).jPlayer("setMedia", {
                 m4a: "http://www.jplayer.org/audio/m4a/TSP-01-Cro_magnon_man.m4a",
-				oga: "/static/mp3/Dietro.ogg",
+				oga: "http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg",
 			}).jPlayer("play");
 		},
 		supplied: "m4a, oga",
