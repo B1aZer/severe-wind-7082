@@ -46,7 +46,7 @@ function touchScroll(id){
 		},
 		supplied: "m4a, oga, mp3",
 		swfPath: "/static/js",
-		solution: "flash"
+		solution: "flash, html"
 	});
     
 
