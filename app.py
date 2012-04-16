@@ -44,7 +44,8 @@ vk = oauth.remote_app('vkontakte',
     access_token_url='https://api.vk.com/oauth/token',
     authorize_url='http://api.vk.com/oauth/authorize',
     consumer_key='2904906',
-    consumer_secret='xpyuJye6NozdTazuuRvM'
+    consumer_secret='xpyuJye6NozdTazuuRvM',
+    request_token_params={'scope': 'offline'}
 )
 
 @app.before_request
